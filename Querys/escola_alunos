@@ -1,0 +1,45 @@
+CREATE TABLE escolas_alunos AS
+SELECT 
+    e.CODESC AS codigo_escola,
+    e.NOMES AS nome_escola,
+    e.DRE AS diretoria_regional,
+    ed.CODESC AS codigo_escola_educando,
+    ed.SERIEV AS serie_ano,
+    ed.SEXO AS sexo_aluno,
+    ed.IDADE AS idade_aluno,
+    ed.RACA AS raca_aluno,
+    ed.NEE AS necessidade_especial,
+    ed.QTDE AS quantidade_alunos
+FROM 
+    escolas e
+JOIN 
+    educandos ed
+ON 
+    e.CODESC = ed.CODESC;
+
+ Para uma única linha por aluno, precisamos garantir que a consulta agrupe os dados corretamente. Para isso, você pode usar a função GROUP BY e agregar os valores das colunas raca_aluno, necessidade_especial e quantidade_alunos.
+
+Aqui está um exemplo de como ajustar a consulta:
+
+sql
+Copy
+CREATE TABLE escolas_alunos AS
+SELECT 
+    e.CODESC AS codigo_escola,
+    e.NOMES AS nome_escola,
+    e.DRE AS diretoria_regional,
+    ed.CODESC AS codigo_escola_educando,
+    ed.SERIEV AS serie_ano,
+    ed.SEXO AS sexo_aluno,
+    ed.IDADE AS idade_aluno,
+    ed.RACA AS raca_aluno,
+    ed.NEE AS necessidade_especial,
+    SUM(ed.QTDE) AS quantidade_alunos  -- Soma a quantidade de alunos por categoria
+FROM 
+    escolas e
+JOIN 
+    educandos ed
+ON 
+    e.CODESC = ed.CODESC
+GROUP BY 
+    e.CODESC, e.NOMES, e.DRE, ed.CODESC, ed.SERIEV, ed.SEXO, ed.IDADE, ed.RACA, ed.NEE;
