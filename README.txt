@@ -68,4 +68,4 @@ Matplotlib
 
 Streamlit
 
-DBeaver
+DBeaver.
