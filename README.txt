@@ -69,3 +69,6 @@ Matplotlib
 Streamlit
 
 DBeaver.
+
+Link do Banco para download
+https://drive.google.com/file/d/1hqQWYblNx9evrv3lukdLoU-zILQTDt4V/view?usp=drive_link
